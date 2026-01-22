@@ -99,3 +99,22 @@ This indicates that the original HTML file was compressed by the server
 before being sent over the network, reducing the amount of data
 transferred and improving page load performance.
 
+
+
+
+
+## Server Header Obfuscation
+
+Changing Apache’s `Server` header is not reliably possible using only `mod_headers`
+because Apache generates the `Server` header internally after many header filters run.
+To fully override the header, ModSecurity was installed and configured.
+
+`libapache2-mod-security2` was enabled and the directive below was added to
+`/etc/apache2/mods-enabled/security2.conf`:
+
+`SecServerSignature "CSE135 Server"`
+
+After restarting Apache, the response headers (verified in Chrome DevTools / curl)
+show the server header as `Server: CSE135 Server`.
+
+

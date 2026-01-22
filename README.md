@@ -64,6 +64,18 @@ The site directory is owned by the user `renee` so Git can update files without 
 ### Webhook Listener
 A Flask application listens for GitHub webhook events on port `9000`.
 
+## Password-Protected Area
+
+The team site is protected using Apache Basic Authentication over HTTPS. 
+ysing the file hello.php
+
+Protected URL:
+- https://reneed.site/members/
+
+Login credentials:
+- Username: teamuser
+- Password: user123
+
 - Endpoint: `/deploy`
 - Trigger: GitHub push events
 - When a POST request is received, the deploy script is executed automatically

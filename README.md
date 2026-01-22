@@ -81,3 +81,21 @@ Login credentials:
 - When a POST request is received, the deploy script is executed automatically
 
 The webhook was configured in GitHub under:Repository → Settings → Webhooks
+
+
+
+## Text Compression
+
+Text compression was enabled on the Apache server using `mod_deflate`.
+After enabling compression, HTML, CSS, and JavaScript files are sent to
+the browser in a compressed (gzip) format.
+
+This was verified using Chrome DevTools. When inspecting the network
+request for the HTML page, the response headers include:
+
+`Content-Encoding: gzip`
+
+This indicates that the original HTML file was compressed by the server
+before being sent over the network, reducing the amount of data
+transferred and improving page load performance.
+

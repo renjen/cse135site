@@ -44,29 +44,16 @@ HTTPS was enabled using Certbot and Let’s Encrypt. After setup, the site is ac
 
 ---
 
-## GitHub Deployment
-The site is deployed directly from GitHub. Whenever changes are pushed to the `main` branch, the server automatically pulls the latest updates and reloads Apache.
+## GitHub Auto-Deploy Setup
 
-### Repository Setup
-The website directory was initialized as a Git repository and connected to GitHub using SSH authentication. An SSH key was generated on the droplet and added to GitHub under **Settings → SSH and GPG Keys**.
+This site is automatically deployed using GitHub and a webhook on the DigitalOcean server. Whenever I push changes to the main branch of my GitHub repository, the website updates on the server without needing to manually pull the code.
 
----
+The website files are stored in `/var/www/reneed.site` and the directory is connected to GitHub using SSH authentication. An SSH key was generated on the server and added to my GitHub account, allowing secure access to the repository without using a username or password.
 
-## Auto-Deploy Setup
-Automatic deployment is handled using a GitHub webhook and a small Flask application running on the server.
+To handle deployment, a shell script (`deploy-cse135.sh`) was created on the server. This script pulls the latest changes from the GitHub repository and reloads Apache so the updates go live immediately. A Flask application runs on the server and listens for GitHub webhook events on port 9000. When GitHub sends a POST request after a push, the Flask app triggers the deploy script.
 
-### Deploy Script
-A deploy script is located at:
-This script:
-1. Pulls the latest changes from the GitHub repository
-2. Reloads Apache so the updates go live immediately
+A GitHub webhook was configured in the repository settings to send push events to the server’s `/deploy` endpoint. This setup was verified by pushing changes to GitHub and confirming that the website updated automatically without manual intervention.
 
-The site directory is owned by the user `renee` so Git can update files without permission issues.
-
----
-
-### Webhook Listener
-A Flask application listens for GitHub webhook events on port `9000`.
 
 ## Password-Protected Area
 

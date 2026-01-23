@@ -1,6 +1,13 @@
 # CSE 135 – Personal Course Website
 
 This project is a personal course website hosted on a DigitalOcean Ubuntu droplet using Apache. The site includes a homepage for course assignments and a personal member page. The website is deployed from GitHub and automatically updates whenever changes are pushed.
+##Memebers of the Team:
+- Renee Dhanaraj
+- 
+ Login for APache for the grader:
+grader
+ucsdpa1
+ 
 
 Live site:
 - https://reneed.site  
@@ -50,9 +57,6 @@ Automatic deployment is handled using a GitHub webhook and a small Flask applica
 
 ### Deploy Script
 A deploy script is located at:
-
-
-
 This script:
 1. Pulls the latest changes from the GitHub repository
 2. Reloads Apache so the updates go live immediately
@@ -71,7 +75,6 @@ ysing the file hello.php
 
 Protected URL:
 - https://reneed.site/members/
-
 Login credentials:
 - Username: teamuser
 - Password: user123

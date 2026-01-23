@@ -62,6 +62,7 @@ ysing the file hello.php
 
 Protected URL:
 - https://reneed.site/members/
+- Once you login it doens't prompt you to log in again and again. But on incognito it does. 
 Login credentials:
 - Username: teamuser
 - Password: user123

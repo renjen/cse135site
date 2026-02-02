@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Echo Page</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; }
+    .row { display: flex; gap: 12px; align-items: center; margin: 10px 0; }
+    label { min-width: 220px; font-weight: 600; }
+    select, input { padding: 8px; min-width: 260px; }
+    button { padding: 10px 12px; cursor: pointer; }
+    .param-row { display: flex; gap: 10px; align-items: center; margin: 10px 0; }
+    .param-row input { min-width: 220px; }
+    textarea { width: 100%; height: 280px; padding: 10px; font-family: ui-monospace, Menlo, monospace; }
+    .muted { color: #444; margin-top: 6px; }
+  </style>
+</head>
+
+<body>
+  <h1>Echo Page</h1>
+  <p class="muted">
+    GET/POST + x-www-form-urlencoded will navigate (works without JS).<br/>
+    PUT/DELETE or JSON will use fetch() and show output below.
+  </p>
+
+  <form id="echoForm" method="GET" action="/hw2/python/echo-python.py">
+    <div class="row">
+      <label for="lang">Choose a language:</label>
+      <select id="lang">
+        <option value="python">Python</option>
+        <option value="php">PHP</option>
+        <option value="c">C</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <label for="method">Choose an HTTP method:</label>
+      <select id="method">
+        <option value="GET">GET</option>
+        <option value="POST">POST</option>
+        <option value="PUT">PUT</option>
+        <option value="DELETE">DELETE</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <label for="encoding">Choose an encoding method:</label>
+      <select id="encoding">
+        <option value="application/x-www-form-urlencoded">x-www-form-urlencoded</option>
+        <option value="application/json">application/json</option>
+      </select>
+    </div>
+
+    <h2>Parameters</h2>
+    <div id="paramContainer"></div>
+
+    <div class="row">
+      <button type="button" id="addParamBtn">+ Add parameter</button>
+      <button type="submit">Send Request</button>
+    </div>
+
+    <h2>Response</h2>
+    <textarea id="responseBox" readonly></textarea>
+  </form>
+
+  <script>
+    (function () {
+      const endpoints = {
+        python: "/hw2/python/echo-python.py",
+        php: "/hw2/php/echo-php.php",
+        c: "/hw2/c/echo-c.cgi",
+      };
+
+      const form = document.getElementById("echoForm");
+      const lang = document.getElementById("lang");
+      const method = document.getElementById("method");
+      const encoding = document.getElementById("encoding");
+      const paramContainer = document.getElementById("paramContainer");
+      const responseBox = document.getElementById("responseBox");
+      const addParamBtn = document.getElementById("addParamBtn");
+
+      function addRow(k = "", v = "") {
+        const row = document.createElement("div");
+        row.className = "param-row";
+
+        const kIn = document.createElement("input");
+        kIn.className = "param-key";
+        kIn.placeholder = "key";
+        kIn.value = k;
+
+        const vIn = document.createElement("input");
+        vIn.className = "param-val";
+        vIn.placeholder = "value";
+        vIn.value = v;
+
+        const rm = document.createElement("button");
+        rm.type = "button";
+        rm.textContent = "Remove";
+        rm.onclick = () => row.remove();
+
+        row.appendChild(kIn);
+        row.appendChild(vIn);
+        row.appendChild(rm);
+        paramContainer.appendChild(row);
+      }
+
+      // defaults
+      addRow("name", "Renee");
+      addRow("favorite", "CSE");
+
+      addParamBtn.addEventListener("click", () => addRow());
+
+      function collectParams() {
+        const obj = {};
+        const usp = new URLSearchParams();
+
+        document.querySelectorAll(".param-row").forEach((row) => {
+          const k = row.querySelector(".param-key").value.trim();
+          const v = row.querySelector(".param-val").value.trim();
+          if (!k) return;
+          obj[k] = v;
+          usp.append(k, v);
+        });
+
+        return { obj, usp };
+      }
+
+      function clearHidden() {
+        document.querySelectorAll("input.__hiddenParam").forEach((n) => n.remove());
+      }
+
+      function addHiddenParams(usp) {
+        clearHidden();
+        for (const [k, v] of usp.entries()) {
+          const inp = document.createElement("input");
+          inp.type = "hidden";
+          inp.name = k;
+          inp.value = v;
+          inp.className = "__hiddenParam";
+          form.appendChild(inp);
+        }
+      }
+
+      function updateFormAction() {
+        form.action = endpoints[lang.value];
+
+        // For no-JS fallback: only GET/POST are real submissions
+        form.method = (method.value === "GET" || method.value === "POST") ? method.value : "POST";
+        form.enctype = "application/x-www-form-urlencoded";
+      }
+
+      lang.addEventListener("change", updateFormAction);
+      method.addEventListener("change", updateFormAction);
+      updateFormAction();
+
+      form.addEventListener("submit", async (e) => {
+        const target = endpoints[lang.value];
+        const m = method.value;
+        const enc = encoding.value;
+        const { obj, usp } = collectParams();
+
+        if ((m === "GET" || m === "POST") && enc === "application/x-www-form-urlencoded") {
+          form.action = target;
+          form.method = m;
+          form.enctype = "application/x-www-form-urlencoded";
+          addHiddenParams(usp);
+          return; // allow navigation
+        }
+
+        e.preventDefault();
+        clearHidden();
+        responseBox.value = "";
+
+        try {
+          let url = target;
+          const opts = { method: m, headers: {} };
+
+          if (m === "GET") {
+            const qs = usp.toString();
+            if (qs) url = target + "?" + qs;
+          } else {
+            if (enc === "application/json") {
+              opts.headers["Content-Type"] = "application/json";
+              opts.body = JSON.stringify(obj);
+            } else {
+              opts.headers["Content-Type"] = "application/x-www-form-urlencoded";
+              opts.body = usp.toString();
+            }
+          }
+
+          const res = await fetch(url, opts);
+          const text = await res.text();
+          responseBox.value = `HTTP ${res.status} ${res.statusText}\n\n` + text;
+        } catch (err) {
+          responseBox.value = "Request failed: " + err;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

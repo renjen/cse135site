@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,55 +9,84 @@
     body { font-family: Arial, sans-serif; margin: 40px; }
     h1 { margin-bottom: 0; }
     .sub { margin-top: 6px; color: #555; }
-    h2 { margin-top: 28px; }
-    ul { line-height: 1.8; }
+    details { margin-top: 18px; padding: 12px 14px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; }
+    summary { cursor: pointer; font-size: 1.15rem; font-weight: 700; }
+    .hint { color:#666; font-size: 0.95rem; margin: 8px 0 0 0; }
+    ul { line-height: 1.8; margin-top: 10px; }
+    a { text-decoration: none; }
+    a:hover { text-decoration: underline; }
     code { background: #f3f3f3; padding: 2px 6px; border-radius: 4px; }
+    .footer { margin-top: 28px; }
   </style>
 </head>
 <body>
   <h1>CSE 135 - HW2</h1>
+  <p style="color:red;font-weight:900;font-size:22px">UPDATED MARKER 123</p>
   <div class="sub">Renee — Demo links for graders</div>
 
-  <h2>Python</h2>
-  <ul>
-    <li><a href="/hw2/python/hello-html-python.py">Hello HTML</a></li>
-    <li><a href="/hw2/python/hello-json-python.py">Hello JSON</a></li>
-    <li><a href="/hw2/python/environment-python.py">Environment</a></li>
-    <li><a href="/hw2/python/echo-form.html">Echo (Form → POST)</a></li>
-    <li><a href="/hw2/python/state-python-set.py">State (Set)</a> | <a href="/hw2/python/state-python-view.py">View</a></li>
-  </ul>
+  <!-- Shared Echo Form -->
+  <p class="hint">
+    Shared form for POST echo tests:
+    <a href="/hw2/echo-form.html">echo-form.html</a>
+  </p>
 
-  <h2>PHP</h2>
-  <ul>
-    <li><a href="/hw2/php/hello-html-php.php">Hello HTML</a></li>
-    <li><a href="/hw2/php/hello-json-php.php">Hello JSON</a></li>
-    <li><a href="/hw2/php/environment-php.php">Environment</a></li>
-    <li><a href="/hw2/php/echo-php.php">Echo</a></li>
-    <li><a href="/hw2/php/state-php-set.php">State (Set)</a> | <a href="/hw2/php/state-php-view.php">View</a></li>
-  </ul>
+  <details open>
+    <summary>Python</summary>
+    <p class="hint">Scripts in <code>/hw2/python/</code></p>
+    <ul>
+      <li><a href="/hw2/python/hello-html-python.py">Hello HTML</a></li>
+      <li><a href="/hw2/python/hello-json-python.py">Hello JSON</a></li>
+      <li><a href="/hw2/python/environment-python.py">Environment</a></li>
+      <li>
+        <a href="/hw2/echo-form.html">Echo (Form → POST)</a>
+        <span class="hint"> (should submit to your Python echo handler if your form is set that way)</span>
+      </li>
+      <li><a href="/hw2/python/state-python-set.py">State (Set)</a> | <a href="/hw2/python/state-python-view.py">View</a></li>
+    </ul>
+  </details>
 
-  <h2>Node.js</h2>
-  <ul>
-    <li><a href="/hw2/node/hello-html-node">Hello HTML</a></li>
-    <li><a href="/hw2/node/hello-json-node">Hello JSON</a></li>
-    <li><a href="/hw2/node/environment-node">Environment</a></li>
-    <li><a href="/hw2/node/echo-node">Echo</a></li>
-    <li><a href="/hw2/node/state-node-set">State (Set)</a> | <a href="/hw2/node/state-node-view">View</a></li>
-  </ul>
+  <details>
+    <summary>PHP</summary>
+    <p class="hint">Scripts in <code>/hw2/php/</code></p>
+    <ul>
+      <li><a href="/hw2/php/hello-html-php.php">Hello HTML</a></li>
+      <li><a href="/hw2/php/hello-json-php.php">Hello JSON</a></li>
+      <li><a href="/hw2/php/environment-php.php">Environment</a></li>
+      <li><a href="/hw2/php/echo-php.php">Echo</a> <span class="hint">(direct endpoint)</span></li>
+      <li><a href="/hw2/echo-form.html">Echo (Form → POST)</a> <span class="hint">(shared form)</span></li>
+      <li><a href="/hw2/php/state-php-set.php">State (Set)</a> | <a href="/hw2/php/state-php-view.php">View</a></li>
+    </ul>
+  </details>
 
-  <h2>Perl (CGI)</h2>
-  <ul>
-    <li><a href="/hw2/cgi/perl-hello-html-world.pl">Hello HTML</a></li>
-    <li><a href="/hw2/cgi/perl-hello-json-world.pl">Hello JSON</a></li>
-    <li><a href="/hw2/cgi/perl-env.pl">Environment (Manual)</a></li>
-    <li><a href="/hw2/cgi/perl-env-pm.pl">Environment (CGI.pm)</a></li>
-    <li><a href="/hw2/cgi/perl-get-echo.pl">GET Echo</a></li>
-    <li><a href="/hw2/cgi/perl-post-echo.pl">POST Echo</a></li>
-    <li><a href="/hw2/cgi/perl-general-echo.pl">General Echo</a></li>
-    <li><a href="/hw2/cgi/perl-sessions-1.pl">Sessioning 1</a> | <a href="/hw2/cgi/perl-sessions-2.pl">Sessioning 2</a></li>
-    <li><a href="/hw2/cgi/test.pl">Your test.pl</a></li>
-  </ul>
+  <details>
+    <summary>C</summary>
+    <p class="hint">Executables in <code>/hw2/c/</code> (adjust names below if yours differ)</p>
+    <ul>
+      <li><a href="/hw2/c/hello-html-c">Hello HTML</a></li>
+      <li><a href="/hw2/c/hello-json-c">Hello JSON</a></li>
+      <li><a href="/hw2/c/environment-c">Environment</a></li>
+      <li><a href="/hw2/c/echo-c">Echo</a> <span class="hint">(direct endpoint)</span></li>
+      <li><a href="/hw2/echo-form.html">Echo (Form → POST)</a> <span class="hint">(shared form)</span></li>
+      <li><a href="/hw2/c/state-c-set">State (Set)</a> | <a href="/hw2/c/state-c-view">View</a></li>
+    </ul>
+  </details>
 
-  <p><a href="/">Back to main site</a></p>
+  <details>
+    <summary>Perl (CGI)</summary>
+    <p class="hint">Scripts in <code>/hw2/cgi/</code></p>
+    <ul>
+      <li><a href="/hw2/cgi/perl-hello-html-world.pl">Hello HTML</a></li>
+      <li><a href="/hw2/cgi/perl-hello-json-world.pl">Hello JSON</a></li>
+      <li><a href="/hw2/cgi/perl-env.pl">Environment (Manual)</a></li>
+      <li><a href="/hw2/cgi/perl-env-pm.pl">Environment (CGI.pm)</a></li>
+      <li><a href="/hw2/cgi/perl-get-echo.pl">GET Echo</a></li>
+      <li><a href="/hw2/cgi/perl-post-echo.pl">POST Echo</a></li>
+      <li><a href="/hw2/cgi/perl-general-echo.pl">General Echo</a></li>
+      <li><a href="/hw2/cgi/perl-sessions-1.pl">Sessioning 1</a> | <a href="/hw2/cgi/perl-sessions-2.pl">Sessioning 2</a></li>
+      <li><a href="/hw2/cgi/test.pl">Your test.pl</a></li>
+    </ul>
+  </details>
+
+  <p class="footer"><a href="/">Back to main site</a></p>
 </body>
 </html>

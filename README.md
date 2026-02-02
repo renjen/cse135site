@@ -14,8 +14,8 @@ Live site:
 - Personal page: https://reneed.site/members/renee.html
 
 Login to th site is: 
-teamuser
-user123
+- teamuser
+- user123
 
 
 ---
@@ -134,7 +134,14 @@ Echo (supports multiple HTTP methods)
 State (set/view/clear)
 
 # Server Information:
+Server Information
 
+Hosting provider: DigitalOcean
+
+Web server: Apache
+
+Domain: reneed.site
+Server access: as given above. 
 
 #Analytics: 
 Google Analytics
@@ -156,9 +163,6 @@ logrocket-session.mp4
 
 Free Choice Analytics – Plausible
 
-For the free-choice analytics requirement, Plausible Analytics was evaluated and integrated into the website.
-
-Plausible was chosen because it provides privacy-friendly analytics without using cookies, session replay, or user fingerprinting. It offers aggregate metrics such as page views, visitors, and referrers while minimizing data collection.
-
-The Plausible script was added to the site’s HTML, and real-time analytics data appeared after navigating the site. A screenshot of the Plausible dashboard is included as free-choice.png.
-
+For the free choice analytics requirement, I looked at several analytics tools, including Google Analytics and other privacy focused platforms. Since Google Analytics was already used earlier in the assignment, I chose to evaluate Plausible Analytics as an alternative.
+I selected Plausible because it focuses on privacy-friendly analytics and does not rely on cookies, session replay, or user fingerprinting. Instead, it provides simple but useful metrics such as page views, visitors, and referrers while collecting minimal user data.
+To evaluate Plausible, I integrated it directly into my website by adding the provided script to the site’s HTML. After navigating and interacting with the site, I was able to see real-time analytics data appear on the Plausible dashboard. Overall, Plausible was easy to set up and provided a clean and lightweight way to understand basic site usage.

@@ -115,7 +115,7 @@ show the server header as `Server: CSE135 Server`.
 
 
 ----------------------------------------------------------------------
-###HW2: 
+##HW2: 
 Live site: https://reneed.site
 Homework 2 – CGI Programs
 
@@ -133,15 +133,15 @@ Echo (supports multiple HTTP methods)
 
 State (set/view/clear)
 
-# Server Information:
-Server Information
-
-Hosting provider: DigitalOcean
-
-Web server: Apache
-
-Domain: reneed.site
-Server access: as given above. 
+## Server Information
+- Hosting provider: DigitalOcean
+- Server IP address: 134.209.15.14
+- Domain: reneed.site
+- Web server: Apache
+- SSH access: Public key authentication
+	- Username: teamuser
+	- Password: user123
+- SSH key type: ed25519
 
 #Analytics: 
 Google Analytics

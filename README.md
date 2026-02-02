@@ -13,6 +13,11 @@ Live site:
 - https://reneed.site  
 - Personal page: https://reneed.site/members/renee.html
 
+Login to th site is: 
+teamuser
+user123
+
+
 ---
 
 ## Overview
@@ -108,4 +113,52 @@ To fully override the header, ModSecurity was installed and configured.
 After restarting Apache, the response headers (verified in Chrome DevTools / curl)
 show the server header as `Server: CSE135 Server`.
 
+
+----------------------------------------------------------------------
+###HW2: 
+Live site: https://reneed.site
+Homework 2 – CGI Programs
+
+Under Homework 2 on the main website, there are links to all CGI programs written in multiple languages, including Python, PHP, C, and Perl.
+
+Each language implementation includes:
+
+Hello HTML
+
+Hello JSON
+
+Environment variables
+
+Echo (supports multiple HTTP methods)
+
+State (set/view/clear)
+
+# Server Information:
+
+
+#Analytics: 
+Google Analytics
+
+Google Analytics was integrated into the site to track basic page views and usage statistics. A screenshot of the Google Analytics dashboard is included in the submission as ga-dashboard.png.
+
+
+LogRocket
+
+LogRocket was used to capture live session replays and client-side interactions.
+The LogRocket script was added to the site, and user interactions were recorded by navigating through various pages.
+
+Included in the submission:
+
+logrocket.png — screenshot of the LogRocket dashboard
+
+logrocket-session.mp4
+
+
+Free Choice Analytics – Plausible
+
+For the free-choice analytics requirement, Plausible Analytics was evaluated and integrated into the website.
+
+Plausible was chosen because it provides privacy-friendly analytics without using cookies, session replay, or user fingerprinting. It offers aggregate metrics such as page views, visitors, and referrers while minimizing data collection.
+
+The Plausible script was added to the site’s HTML, and real-time analytics data appeared after navigating the site. A screenshot of the Plausible dashboard is included as free-choice.png.
 

@@ -171,6 +171,7 @@ To evaluate Plausible, I integrated it directly into my website by adding the pr
 
 
 ##Hw 3:
+testing website: https://test.reneed.site/index.html
 Base URL: https://reporting.reneed.site
 REST Endpoint
 

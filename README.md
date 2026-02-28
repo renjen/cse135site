@@ -166,3 +166,49 @@ Free Choice Analytics – Plausible
 For the free choice analytics requirement, I looked at several analytics tools, including Google Analytics and other privacy focused platforms. Since Google Analytics was already used earlier in the assignment, I chose to evaluate Plausible Analytics as an alternative.
 I selected Plausible because it focuses on privacy-friendly analytics and does not rely on cookies, session replay, or user fingerprinting. Instead, it provides simple but useful metrics such as page views, visitors, and referrers while collecting minimal user data.
 To evaluate Plausible, I integrated it directly into my website by adding the provided script to the site’s HTML. After navigating and interacting with the site, I was able to see real-time analytics data appear on the Plausible dashboard. Overall, Plausible was easy to set up and provided a clean and lightweight way to understand basic site usage.
+
+
+
+
+##Hw 3:
+Base URL: https://reporting.reneed.site
+REST Endpoint
+
+The REST API was implemented using PHP on the reporting host.
+The endpoint connects to a MySQL database (cse135_hw3) and operates on the events table.
+
+The API supports full CRUD operations for static event records.
+
+Implemented Routes
+HTTP Method	Route	Description
+GET	/api/static	Retrieve the latest 200 static event records from the database
+GET	/api/static/{id}	Retrieve a specific static event record by ID
+POST	/api/static	Insert a new static event record into the database
+PUT	/api/static/{id}	Update an existing static event record by ID
+DELETE	/api/static/{id}	Delete a static event record by ID
+
+
+Behavior Details
+
+POST expects a JSON body.
+
+PUT and DELETE require an ID in the URL.
+
+If a requested ID does not exist, the API returns:
+
+{"error":"not_found"}
+
+All responses are returned as application/json.
+
+CORS headers are enabled for GET, POST, PUT, DELETE, and OPTIONS.
+
+
+Database
+
+Database: cse135_hw3
+
+Table: events
+
+The API filters for records where event_type = 'static'.
+
+

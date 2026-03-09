@@ -213,3 +213,187 @@ Table: events
 The API filters for records where event_type = 'static'.
 
 
+----------------------
+##HW4
+In order to log into main domain site, you use 
+teamuser
+user123
+
+Analytics Backend Scaffold
+Live Application
+https://reneed.site/hw4/login.php
+
+Grader Login Credentials
+Username: grader
+Password: ucsdpa1
+
+Overview
+This assignment implements the first version of an analytics backend system.
+The goal of the assignment is to build a minimal backend that demonstrates:
+
+1. Authentication and protected routes
+2. Connection from a datastore to a data table
+3. Connection from a datastore to a chart visualization
+
+The application is implemented using PHP and MariaDB and runs on an Apache server hosted on a DigitalOcean Ubuntu droplet.
+
+---
+
+Hosting Environment
+
+Server: DigitalOcean Ubuntu Droplet
+Web Server: Apache2
+Backend Language: PHP
+Database: MariaDB
+Domain: https://reneed.site
+
+Database used for analytics collection:
+cse135_hw3
+
+Main analytics table:
+events
+
+---
+
+Step 1 – MVC-style scaffold with authentication
+
+The analytics backend includes a simple authentication system implemented using PHP sessions.
+
+Pages implemented
+
+/hw4/login.php
+Login page for the analytics application.
+
+Users must authenticate before accessing any protected pages.
+
+/hw4/dashboard.php
+Protected dashboard page.
+Displays the logged-in user and navigation links.
+
+/hw4/reports.php
+Protected analytics reporting page.
+
+/hw4/logout.php
+Destroys the session and returns the user to the login page.
+
+Authentication implementation
+
+Authentication is implemented using PHP sessions.
+The file:
+
+/hw4/inc/auth.php
+
+acts as middleware that checks whether a user session exists before allowing access to protected pages.
+
+If a user attempts to access a protected route without logging in, they are redirected to the login page.
+
+Example protected routes:
+
+/hw4/dashboard.php
+/hw4/reports.php
+
+Forceful browsing protection
+
+If a user attempts to directly access a protected page such as:
+
+https://reneed.site/hw4/dashboard.php
+
+https://reneed.site/hw4/reports.php
+
+without authentication, the application automatically redirects them to:
+
+/hw4/login.php
+
+This prevents bypassing the login system by manually entering URLs.
+
+---
+
+Step 2 – Datastore connected to a data table
+
+The reporting page connects to the MariaDB datastore and retrieves analytics data from the events table.
+
+Database
+
+Database name: cse135_hw3
+Table name: events
+
+Relevant table fields
+
+id
+server_ts
+ip
+event_type
+session_id
+page
+payload_json
+created_at
+
+This demonstrates that the backend is successfully connected to the datastore and able to display collected analytics data in tabular form.
+
+---
+
+Step 3 – Datastore connected to a chart
+
+The reports page also includes a data visualization generated using Chart.js.
+
+Chart library used
+
+Chart.js (loaded via CDN)
+
+API endpoint
+
+/hw4/api/events_by_type.php
+
+This endpoint queries the database and aggregates analytics data by event type.
+
+Frontend chart
+
+The reports page fetches this API endpoint and renders a bar chart that shows the distribution of collected event types.
+
+Data flow
+
+MariaDB events table
+→ PHP API endpoint
+→ JSON response
+→ Chart.js visualization
+
+This demonstrates that the analytics datastore is connected to a chart visualization.
+
+---
+
+Application Structure
+
+hw4/
+
+login.php
+dashboard.php
+reports.php
+logout.php
+
+inc/
+auth.php
+db.php
+
+api/
+events_by_type.php
+
+assets/
+
+---
+
+Summary
+
+This implementation satisfies the three HW4 requirements:
+
+Step 1
+Authentication system with login, logout, protected routes, and forceful browsing protection.
+
+Step 2
+Connection from the MariaDB datastore to a reporting table displaying collected analytics events.
+
+Step 3
+Connection from the datastore to a Chart.js visualization showing aggregated analytics data.
+
+The system forms the initial scaffold for a full analytics backend that can be expanded with additional reporting and visualizations.
+
+
